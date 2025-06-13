@@ -77,6 +77,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+const config = useRuntimeConfig()
 const router = useRouter()
 const username = ref('')
 const email = ref('')
@@ -87,7 +88,7 @@ const showPassword = ref(false)
 const handleSignup = async () => {
   error.value = ''
   try {
-    const res = await fetch('http://localhost:5000/api/auth/signup', {
+    const res = await fetch(`${config.public.apiBaseUrl}/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: username.value, email: email.value, password: password.value })
