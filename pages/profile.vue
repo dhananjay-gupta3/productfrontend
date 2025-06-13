@@ -124,7 +124,7 @@
   <script setup>
   import { ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
-  
+  const config = useRuntimeConfig()
   const user = ref(null)
   const profileData = ref({ submittedProducts: [], upvotedProducts: [] })
   const loading = ref(true)
@@ -138,7 +138,7 @@
       return logo
     }
     // Otherwise, assume it's a file served by your backend, e.g., http://localhost:5000/uploads/...
-    return `http://localhost:5000/uploads/${logo.replace(/^\//, '')}`
+    return ``${config.public.apiBaseUrl}/uploads/${logo.replace(/^\//, '')}`
   }
   const onImageError = (e) => {
     e.target.src = 'https://via.placeholder.com/48x48?text=No+Image'
@@ -156,7 +156,7 @@
         loading.value = false
         return
       }
-      const res = await fetch('http://localhost:5000/api/users/me/profile', {
+      const res = await fetch(`${config.public.apiBaseUrl}/api/users/me/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       if (!res.ok) throw new Error('Error fetching profile')
