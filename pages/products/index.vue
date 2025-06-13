@@ -458,7 +458,7 @@ const submitComment = async (productId) => {
   }
   commentLoading.value[productId] = true
   try {
-    const response = await $fetch(`${config.public.apiBaseUrl}/products/${productId}/comments`, {
+    const response = await $fetch(`$https://productbackends.onrender.com/products/${productId}/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -582,7 +582,7 @@ const getImageUrl = (imagePath) => {
   const baseUrl = process.dev
     ? config.public.apiBaseUrl.replace('/api', '')
     : config.public.apiBaseUrl
-  return `${baseUrl}/uploads/${imagePath}`
+  return `https://productbackends.onrender.com/uploads/${imagePath}`
 }
 const handleImageError = (id) => {
   brokenImages.value[id] = true
